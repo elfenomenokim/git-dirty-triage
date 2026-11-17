@@ -1,0 +1,7 @@
+flowchart LR
+    A["Changed files in a lagging checkout"] --> C["Compare bytes, published history and lines"]
+    B["Remote tip<br/>Fetched by default"] --> C
+    C --> D["Already published<br/>identical · stale · contained"]
+    C --> E["Unpublished<br/>new · differs_clean · eligible binary"]
+    C --> F["Review or report only<br/>conflicts · deletions · skipped paths"]
+    E --> G["Print paths, or build a commit<br/>on the remote tip; no push"]

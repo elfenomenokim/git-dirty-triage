@@ -19,7 +19,7 @@ from .commit import build_commit, commit_unpublished, unpublished_rows
 from .gitio import git, is_text, out, pathspecs_for, resolve_ref, short_path, toplevel, under
 from .report import format_report, json_report, summary_line
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = [
     "__version__",

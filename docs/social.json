@@ -1,0 +1,13 @@
+{
+  "name": "git-dirty-triage",
+  "sentence": "A Git command that separates unpublished edits from work already on the remote.",
+  "tag": "PYTHON · GIT",
+  "terminal": [
+    "$ git-dirty-triage",
+    "checkout is 7 commits behind origin/main",
+    "3 published · 1 unpublished · 1 decision",
+    "$ git-dirty-triage --print-unpublished",
+    "merge.txt  new.txt"
+  ],
+  "flow": ["Fetch remote", "Classify changed paths", "Print unpublished files"]
+}

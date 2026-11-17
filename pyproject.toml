@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "git-dirty-triage"
-version = "0.1.0"
-description = "Tell which modified files in a lagging or shared Git checkout are really unpublished, and commit only those on top of the remote tip without pushing."
+version = "0.1.1"
+description = "A Git command that separates unpublished edits from work already on the remote."
 readme = "README.md"
 requires-python = ">=3.9"
 license = "MIT"
