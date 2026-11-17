@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "git-dirty-triage"
+version = "0.1.0"
+description = "Tell which modified files in a lagging or shared Git checkout are really unpublished, and commit only those on top of the remote tip without pushing."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "El Fenomeno" }]
+keywords = [
+  "git",
+  "dirty",
+  "checkout",
+  "monorepo",
+  "multi-agent",
+  "agents",
+  "three-way-merge",
+  "cli",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Software Development :: Version Control :: Git",
+  "Topic :: Utilities",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/elfenomenokim/git-dirty-triage"
+Repository = "https://github.com/elfenomenokim/git-dirty-triage"
+Issues = "https://github.com/elfenomenokim/git-dirty-triage/issues"
+
+[project.scripts]
+git-dirty-triage = "git_dirty_triage.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
