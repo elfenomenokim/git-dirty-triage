@@ -53,3 +53,18 @@ repository to exercise classification and commit changes; never the shared check
 - Keep README.md, README.ko.md, pyproject description and public.json aligned.
 - A local commit is not publication. Package uploads and version changes require
   the maintainer's release instruction.
+
+## Code Review Rules
+
+A change is a real defect when it:
+
+- moves the user's branch, real index or working files, or pushes from the command.
+- builds a commit on anything but the remote tip with a temporary index.
+- hashes, prints or commits an opaque untracked directory.
+- lets a newline-containing name, a symlink or a deletion into a generated commit.
+- drops the failed-fetch warning, or treats cached remote refs as fresh evidence.
+- mixes tracked paths with untracked entries in the summary counts, or makes per-class counts disagree with the report.
+- describes `contained` as order-aware equivalence, or resolves a conflicting ledger by line union.
+- applies a repo-relative prefix only in the report and not in the Git scan.
+
+Not defects: wording, formatting, comment style, requested extra tests, or a renamed helper.
