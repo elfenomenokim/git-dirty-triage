@@ -1,3 +1,5 @@
+<div align="center">
+
 <img src="https://raw.githubusercontent.com/elfenomenokim/git-dirty-triage/main/docs/logo.svg" width="96" height="96" alt="git-dirty-triage: a local branch leaving the published line">
 
 # git-dirty-triage
@@ -11,6 +13,10 @@ Python 3.9+ · Git 2.x
 [![license](https://img.shields.io/github/license/elfenomenokim/git-dirty-triage)](https://github.com/elfenomenokim/git-dirty-triage/blob/main/LICENSE)
 
 38,925 paths classified in 107 seconds on one warm-cache macOS checkout.
+
+[Install](#install) · [Quick start](#quick-start) · [Why](#why)
+
+</div>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/elfenomenokim/git-dirty-triage/main/docs/demo/dark.gif">

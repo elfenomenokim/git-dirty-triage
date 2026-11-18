@@ -1,3 +1,5 @@
+<div align="center">
+
 <img src="https://raw.githubusercontent.com/elfenomenokim/git-dirty-triage/main/docs/logo.svg" width="96" height="96" alt="게시된 줄에서 갈라져 나온 로컬 브랜치 아이콘">
 
 # git-dirty-triage
@@ -11,6 +13,10 @@ Python 3.9+ · Git 2.x
 [![license](https://img.shields.io/github/license/elfenomenokim/git-dirty-triage)](https://github.com/elfenomenokim/git-dirty-triage/blob/main/LICENSE)
 
 따뜻한 캐시의 macOS 체크아웃 하나에서 107초에 38,925개 경로를 분류했습니다.
+
+[설치](#설치) · [시작하기](#시작하기) · [만든 이유](#만든-이유)
+
+</div>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/elfenomenokim/git-dirty-triage/main/docs/demo/dark.gif">
