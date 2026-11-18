@@ -18,10 +18,12 @@ Python 3.9+ · Git 2.x
 
 </div>
 
+<p align="center">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/elfenomenokim/git-dirty-triage/main/docs/demo/dark.gif">
   <img src="https://raw.githubusercontent.com/elfenomenokim/git-dirty-triage/main/docs/demo/light.gif" alt="A checkout seven commits behind origin is classified, then two unpublished paths are printed" width="1200">
 </picture>
+</p>
 
 영상은 임시 원격 저장소와 복제본 두 개로 기록했습니다. 한쪽은 커밋 7개를 게시하고, 다른 쪽은 뒤처진 상태에서 파일을 수정합니다. [재현 코드와 녹화 소스](docs/demo/).
 

@@ -18,10 +18,12 @@ Python 3.9+ · Git 2.x
 
 </div>
 
+<p align="center">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/elfenomenokim/git-dirty-triage/main/docs/demo/dark.gif">
   <img src="https://raw.githubusercontent.com/elfenomenokim/git-dirty-triage/main/docs/demo/light.gif" alt="A checkout seven commits behind origin is classified, then two unpublished paths are printed" width="1200">
 </picture>
+</p>
 
 The demo uses a throwaway remote and two clones. One clone publishes seven commits; the other keeps local edits. [Fixture and tape](docs/demo/).
 
