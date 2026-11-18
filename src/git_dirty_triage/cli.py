@@ -65,7 +65,7 @@ def main(argv=None):
         if fetched is not None and fetched.returncode:
             print(f"warning: git fetch {a.remote} {branch} failed; comparing with the last fetched {ref}",
                   file=sys.stderr)
-        prefixes = [os.fsencode(x) for x in a.prefix]
+        prefixes = [os.fsencode(os.path.normpath(x)) for x in a.prefix]
         specs = pathspecs_for(top, prefixes)
         rows = (classify_ahead(top, ref, specs) if a.ahead else classify(top, ref, specs, a.untracked))[1]
         if prefixes:

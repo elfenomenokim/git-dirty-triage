@@ -1,6 +1,6 @@
 """Thin wrappers over the git plumbing this tool needs.
 
-Every call here is read-only. The committer builds its objects with the same wrappers, on a
+Working files are stored as canonical Git blobs for comparison. The committer uses a
 temporary index, so the checkout's own index and HEAD are never touched.
 """
 
@@ -75,14 +75,14 @@ def tree_map(repo, rev, pathspecs=()):
 
 
 def hash_files(repo, paths):
-    """Blob id of each working file, in order: one hash-object call per 5,000 paths."""
+    """Canonical blob id of each working file, applying its path-specific clean filters."""
     if not paths:
         return []
-    ids = []
-    for i in range(0, len(paths), 5000):
-        chunk = paths[i:i + 5000]
-        ids += out(repo, "hash-object", "--stdin-paths", inp=b"\n".join(chunk) + b"\n").decode().split()
-    return ids
+    # --stdin-paths interprets C-style quoting. Arguments preserve arbitrary names.
+    return [out(repo, "hash-object", "-w", "--path=" + os.fsdecode(path), "--stdin",
+                inp=open(os.path.join(os.fsencode(repo), path), "rb").read()).decode().strip()
+            for path in paths]
+
 
 
 def show_blob(repo, blob):
@@ -130,7 +130,7 @@ def three_way(base, ours, theirs):
 def under(path, prefix):
     """True when a repo-relative path is the prefix itself or sits below it."""
     p = prefix.rstrip(b"/")
-    return path == p or path.startswith(p + b"/")
+    return not p or p == b"." or path == p or path.startswith(p + b"/")
 
 
 def pathspecs_for(top, prefixes):

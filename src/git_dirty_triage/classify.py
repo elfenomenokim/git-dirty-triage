@@ -15,7 +15,7 @@ Classes, checked in this order:
 
 A clean merge that equals the remote bytes is `contained`: the path only lags.
 
-Files are hashed in one batch and compared with one ls-tree per side; only a path that really
+Files are normalized and hashed by path and compared with one ls-tree per side; only a path that really
 differs spawns more git calls (`log` + `cat-file --batch-check` for earlier versions, then
 `cat-file blob` and `merge-file`).
 """
@@ -49,11 +49,12 @@ def judge(top, ref, row, wblob, oblob, base_blob):
     if oblob and wblob == oblob:
         row["class"] = "identical"
     elif oblob is None:
-        row["class"] = "new"  # bytes are read when a commit is built
+        row["class"] = "new"
+        row["merged"] = show_blob(top, wblob)
     elif wblob in published_versions(top, ref, row["path"]):
         row["class"] = "stale"
     else:
-        working, theirs = open(full, "rb").read(), show_blob(top, oblob)
+        working, theirs = show_blob(top, wblob), show_blob(top, oblob)
         if not (is_text(working) and is_text(theirs)):
             if base_blob == oblob:
                 row["class"] = "differs_binary"
@@ -130,9 +131,15 @@ def classify_ahead(repo, ref, pathspecs=()):
         if line.startswith("+"):
             raw = out(top, "diff-tree", "-r", "--no-commit-id", "--name-only", "-z", "--no-renames", line.split()[1])
             paths.update(p for p in raw.split(b"\0") if p)
+    # git cherry omits merges; inspect each local merge against every parent.
+    for commit in out(top, "rev-list", "--merges", f"{ref}..HEAD").decode().splitlines():
+        raw = out(top, "diff-tree", "-m", "-r", "--no-commit-id", "--name-only", "-z", "--no-renames", commit)
+        paths.update(p for p in raw.split(b"\0") if p)
     if pathspecs:
-        roots = [s.encode("utf-8", "surrogateescape").rstrip(b"/") for s in pathspecs]
-        paths = {p for p in paths if any(p == r or p.startswith(r + b"/") for r in roots)}
+        roots = [s.encode("utf-8", "surrogateescape").rstrip(b"/") for s in pathspecs if s != "."]
+        if not roots:
+            roots = [b""]
+        paths = {p for p in paths if any(not r or p == r or p.startswith(r + b"/") for r in roots)}
     rows, todo = working_rows(top, [("A", p) for p in sorted(paths)])
     wblobs = hash_files(top, [r["path"] for r in todo])
     remote, base = tree_map(top, ref, pathspecs), tree_map(top, base_rev, pathspecs)

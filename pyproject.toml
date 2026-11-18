@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "git-dirty-triage"
-version = "0.1.1"
+version = "0.1.2"
 description = "A Git command that separates unpublished edits from work already on the remote."
 readme = "README.md"
 requires-python = ">=3.9"
