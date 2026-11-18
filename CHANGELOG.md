@@ -3,6 +3,19 @@
 All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses `MAJOR.MINOR.PATCH`.
 
+## [0.1.3] - 2026-11-18
+
+### Fixed
+
+- `--json` escapes every non-ASCII byte in a path, so a checkout that holds a filename Git stored
+  as invalid UTF-8 still prints parseable UTF-8 JSON. `--print-unpublished` keeps writing the exact
+  bytes.
+- `examples/make-demo.sh` refuses an existing target directory instead of deleting it, as
+  `docs/demo/make-repo.sh` already did.
+- `examples/make-demo.sh` creates the bare remote with `--initial-branch=main`, so on a Git without
+  `init.defaultBranch` the clones check out `main` and the fixture holds tracked modifications
+  instead of only untracked files.
+
 ## [0.1.2] - 2026-11-18
 
 ### Fixed

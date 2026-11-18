@@ -7,7 +7,7 @@ already fixed.
 
 | Version | Supported |
 | --- | --- |
-| 0.1.2 | Yes |
+| 0.1.3 | Yes |
 | Older | No |
 
 ## Reporting a vulnerability

@@ -3,15 +3,15 @@
 #
 # One clone publishes six commits. One clone lags and edits the same files, so its checkout holds
 # every class the tool reports. Needs git only; writes under /tmp (or the path you pass) and
-# removes the previous run first.
+# refuses an existing target.
 set -euo pipefail
 
 root="${1:-/tmp/git-dirty-triage-demo}"
-rm -rf "$root"
+[ ! -e "$root" ] || { echo "Target already exists: $root" >&2; exit 1; }
 mkdir -p "$root"
 cd "$root"
 
-git init -q --bare remote.git
+git init -q --bare --initial-branch=main remote.git
 
 git init -q --initial-branch=main seed
 cd seed

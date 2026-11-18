@@ -87,7 +87,7 @@ def main(argv=None):
             print(f"error: {error}", file=sys.stderr)
             return 2
         if a.json:
-            print(json.dumps(receipt, ensure_ascii=False))
+            print(json.dumps(receipt, ensure_ascii=True))
             return 0
         if receipt["status"] == "nothing_to_commit":
             print("nothing to commit: no unpublished path needs a commit")
@@ -99,7 +99,7 @@ def main(argv=None):
         return 0
 
     if a.json:
-        print(json.dumps(json_report(rows, behind, ref, a.ahead, top), ensure_ascii=False))
+        print(json.dumps(json_report(rows, behind, ref, a.ahead, top), ensure_ascii=True))
     else:
         print(format_report(rows, behind, ref, a.ahead))
     return 0
