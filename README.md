@@ -1,7 +1,16 @@
+<img src="https://raw.githubusercontent.com/elfenomenokim/git-dirty-triage/main/docs/logo.svg" width="96" height="96" alt="git-dirty-triage: a local branch leaving the published line">
+
 # git-dirty-triage
 [한국어](README.ko.md)
 
 A Git command that separates unpublished edits from work already on the remote.
+
+Python 3.9+ · Git 2.x
+
+[![pypi](https://img.shields.io/pypi/v/git-dirty-triage?label=pypi)](https://pypi.org/project/git-dirty-triage/)
+[![license](https://img.shields.io/github/license/elfenomenokim/git-dirty-triage)](https://github.com/elfenomenokim/git-dirty-triage/blob/main/LICENSE)
+
+38,925 paths classified in 107 seconds on one warm-cache macOS checkout.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/elfenomenokim/git-dirty-triage/main/docs/demo/dark.gif">
@@ -147,6 +156,8 @@ Exit **0** means the report was produced, even if it contains conflicts. Exit **
 
 ## Contributing
 
-Issues and platform reports are welcome; run `python3 -m compileall -q src` from the source checkout. See [AGENTS.md](AGENTS.md) for the code layout and safety rules.
+Issues and platform reports are welcome; run `python3 -m compileall -q src` from the source checkout and the fixture in `docs/demo/make-repo.sh`. See [CONTRIBUTING.md](CONTRIBUTING.md) for the review process and [AGENTS.md](AGENTS.md) for the code layout and safety rules.
 
-License: [MIT](LICENSE).
+## License
+
+MIT. See [LICENSE](LICENSE).
