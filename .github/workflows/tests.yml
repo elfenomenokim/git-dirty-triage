@@ -23,13 +23,6 @@ jobs:
         include:
           - os: ubuntu-22.04
             python: "3.9"
-        # ubuntu-latest (26.04) ships no 3.9 build; keep the 3.9 floor on ubuntu-22.04.
-        exclude:
-          - os: ubuntu-latest
-            python: "3.9"
-        include:
-          - os: ubuntu-22.04
-            python: "3.9"
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
     steps:
