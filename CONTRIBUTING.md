@@ -41,7 +41,7 @@ temporary repository, never in the checkout you are working in.
 
 - **A fixture or a script** that shows the bug before the change and the right answer after it.
 - **A line under Unreleased** in [CHANGELOG.md](CHANGELOG.md) when a user will notice.
-- **The platforms you did not test** written in the pull request. Only macOS has been exercised.
+- **The platforms you did not test** written in the pull request. The `tests` workflow runs the compile and fixture smoke check on Ubuntu, macOS and Windows with Python 3.9 and 3.13.
 
 ## Review
 
