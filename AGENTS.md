@@ -1,5 +1,29 @@
 # AGENTS.md
 
+## Set up for a user
+
+Goal: in a Git checkout that lags behind its remote, `git-dirty-triage` says which modified files are already published and which carry something new. Nothing here needs the person except which checkout to look at.
+
+1. Check what is present.
+   - `git --version` prints 2.x. If not: `brew install git` (macOS) or `sudo apt install git`.
+   - `uv --version` prints a version. If not: `curl -LsSf https://astral.sh/uv/install.sh | sh`, then `export PATH="$HOME/.local/bin:$PATH"` (or open a new shell).
+2. Install: `uv tool install git-dirty-triage`. It ends with `Installed 1 executable: git-dirty-triage`; `git-dirty-triage --version` prints `git-dirty-triage 0.1.3` or newer. `uv tool update-shell` puts `~/.local/bin` on PATH for later shells. No Python dependencies.
+3. Prove it on a throwaway repository pair, never on the user's checkout:
+   ```sh
+   d=$(mktemp -d); cd $d
+   git init -q --bare remote.git -b main; git clone -q remote.git a; git clone -q remote.git b
+   (cd a && echo one > f.txt && git add f.txt && git commit -qm one && git push -q origin main)
+   (cd b && git pull -q origin main && cd ../a && echo two > f.txt && git commit -qam two && git push -q origin main)
+   (cd b && echo local > new.txt && echo edit > f.txt && git-dirty-triage)
+   ```
+   It prints `checkout is 1 commit behind origin/main`, then a summary that includes `1 needs a decision` and a `new.txt` line marked `new`. Delete `$d` afterwards. (Git needs `user.name` and `user.email` set to commit; set them locally in the scratch repos if it complains.)
+4. Real use: from the user's checkout run `git-dirty-triage` (it fetches the remote first; the working tree is not changed). `git-dirty-triage --print-unpublished` lists only files that carry something new. `--commit-unpublished` makes a commit and needs the user's yes first.
+5. If it fails, in this order:
+   - `git-dirty-triage: command not found`: `~/.local/bin` is not on PATH (step 2).
+   - `not a git repository`: run it from inside the checkout or pass `--repo PATH`.
+   - A fetch error: no network or no access to the remote; add `--no-fetch` to classify against what is already fetched, and say so.
+   - Output says the checkout is not behind: there is nothing to triage; that is a valid result.
+
 ## Layout
 
 - `src/git_dirty_triage/gitio.py`: bounded Git reads and path handling.
